@@ -6,6 +6,15 @@ import axios from 'axios';
 
 export default function Transactions(props) {
   const [transactions, setTransactions] = useState([])
+
+  const deleteTransaction =(id,amount)=>{
+    async function deleteTransactionFromServer(id){
+      await axios.delete(`http://localhost:8003/transactions?id=${id}`);
+    }
+    deleteTransactionFromServer(id)
+    props.updateBalance(-1*amount)
+  }
+
   useEffect(() => {
     /*
     let new_transactions = [
@@ -35,9 +44,9 @@ export default function Transactions(props) {
       setTransactions(new_transactions) 
     }
     fetchTransactions() 
-  },[])
+  },[transactions])
   
   return (
-    <div className='transactions-board'>{transactions.map(transaction => <Transaction transaction={transaction}/>)}</div>
+    <div className='transactions-board'>{transactions.map(transaction => <Transaction transaction={transaction} deleteTransaction={deleteTransaction}/>)}</div>
   )
 }

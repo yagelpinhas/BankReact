@@ -28,6 +28,7 @@ export default function TransactionForm(props) {
       await axios.post(`http://localhost:8003/transactions?amount=${amountInput}&category=${categoryInput}&vendor=${vendorInput}`);
     }
     postTransactionToServer()
+    props.updateBalance(amountInput)
   }
 
   return (

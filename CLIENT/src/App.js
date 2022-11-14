@@ -16,14 +16,19 @@ export default function App() {
     //deleting in server.
     await axios.delete(`/http://localhost:8000/transactions?id=${id}`)
   }
+
+  const updateBalance=(delta)=>{
+    let newBalance = balance+parseInt(delta)
+    setBalance(newBalance)
+  }
   
   return (
     <Router>
       <div className='App'>
       <NavBar/>
       <Balance balance={balance}/>
-      <Route path="/" exact render={() => <Transactions/>} />
-      <Route path="/transactionform" exact render={() => <TransactionForm />} />
+      <Route path="/" exact render={() => <Transactions updateBalance={updateBalance}/>} />
+      <Route path="/transactionform" exact render={() => <TransactionForm updateBalance={updateBalance}/>} />
       <Route path="/breakdown" exact render={() => <Breakdown/>} />
       </div>
     </Router>
