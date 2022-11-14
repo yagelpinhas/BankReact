@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import NavBar from './components/NavBar/NavBar';
+import Transactions from './components/Transactions/Transactions';
+import Balance from './components/Balance/Balance';
+import TransactionForm from './components/TransactionForm/TransactionForm';
+import Breakdown from './components/Breakdown/Breakdown';
+import axios from 'axios';
 
-function App() {
+export default function App() {
+
+  const [balance,setBalance] = useState(0)
+  
+  const deleteTransaction= async function(id){
+    //deleting in server.
+    await axios.delete(`/http://localhost:8000/transactions?id=${id}`)
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div className='App'>
+      <NavBar/>
+      <Balance balance={balance}/>
+      <Route path="/" exact render={() => <Transactions/>} />
+      <Route path="/transactionform" exact render={() => <TransactionForm />} />
+      <Route path="/breakdown" exact render={() => <Breakdown/>} />
+      </div>
+    </Router>
+  )
 }
-
-export default App;

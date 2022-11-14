@@ -1,0 +1,14 @@
+.navbar{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    background-color: bisque;
+    height: 50px;
+  }
+
+.linkInNavigationBar{
+    color: brown;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}

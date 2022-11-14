@@ -9,14 +9,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from SQL_Bank_Manager import SQL_BANK_MANAGER
 from Database_Manager import Database_Manager
 
-connection = pymysql.connect(
-    host="localhost",
-    user="root",
-    password="",
-    db="bank_data_base",
-    charset="utf8",
-    cursorclass=pymysql.cursors.DictCursor
-)
 
 app = FastAPI()
 sql_bank_manager = SQL_BANK_MANAGER()
@@ -24,10 +16,8 @@ database_manager = Database_Manager(sql_bank_manager)
 
 
 origins = [
-    "http://localhost.tiangolo.com",
-    "https://localhost.tiangolo.com",
     "http://localhost",
-    "http://localhost:8080",
+    "http://localhost:3000",
 ]
 
 app.add_middleware(
