@@ -6,6 +6,9 @@ import uvicorn
 import requests
 import pymysql
 from fastapi.middleware.cors import CORSMiddleware
+from SQL_Bank_Manager import SQL_BANK_MANAGER
+from Database_Manager import Database_Manager
+
 connection = pymysql.connect(
     host="localhost",
     user="root",
@@ -16,6 +19,9 @@ connection = pymysql.connect(
 )
 
 app = FastAPI()
+sql_bank_manager = SQL_BANK_MANAGER()
+database_manager = Database_Manager(sql_bank_manager)
+
 
 origins = [
     "http://localhost.tiangolo.com",
@@ -32,51 +38,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/transactions/")    
+@app.get("/transactions")    
 async def get_transactions():
-    try:
-        with connection.cursor() as cursor:
-            query =f'SELECT * FROM transactions'
-            cursor.execute(query)
-            results = cursor.fetchall()
-            return results
-    except TypeError as e:
-        print(e)
+    a=5
+    return database_manager.get_transactions()
 
 @app.post("/transactions")
 async def add_transaction(amount,category,vendor):
-    try:
-        with connection.cursor() as cursor:
-            query = f'INSERT INTO transactions (amount,category,vendor) VALUES({amount},"{category}","{vendor}");'
-            cursor.execute(query)
-            connection.commit()
-    except TypeError as e:
-        print(e)
+    database_manager.add_transaction(amount,category,vendor)
 
 @app.delete("/transactions")
 async def delete_transaction(id):
-    try:
-        with connection.cursor() as cursor:
-            query = f'DELETE FROM transactions WHERE id={id};'
-            cursor.execute(query)
-            connection.commit()
-    except TypeError as e:
-        print(e)
+    database_manager.delete_transaction(id)
 
-@app.get("/breakdown/")
+@app.get("/breakdown")
 async def get_breakdown():
-    try:
-        with connection.cursor() as cursor:
-            query =f'SELECT category,SUM(amount) as sum FROM transactions GROUP BY category'
-            cursor.execute(query)
-            results = cursor.fetchall()
-            return results
-    except TypeError as e:
-        print(e)       
+    return database_manager.get_breakdown()
 
 @app.get('/')
 def root():
     return "Server is running"
 
 if __name__ == "__main__":
-    uvicorn.run("server:app", host="0.0.0.0", port=8000,reload=True)
+    uvicorn.run("server:app", host="0.0.0.0", port=8003,reload=True)
