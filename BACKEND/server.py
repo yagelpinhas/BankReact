@@ -9,11 +9,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from SQL_Bank_Manager import SQL_BANK_MANAGER
 from Database_Manager import Database_Manager
 
-
 app = FastAPI()
 sql_bank_manager = SQL_BANK_MANAGER()
 database_manager = Database_Manager(sql_bank_manager)
-
 
 origins = [
     "http://localhost",
