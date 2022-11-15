@@ -5,10 +5,10 @@ import "./NavBar.css"
 
 export default function NavBar() {
   return (
-    <div className='navbar'>
-      <Link className='linkInNavigationBar' to="/">Home </Link>
-      <Link className='linkInNavigationBar' to="/breakdown">Breakdown </Link>
-      <Link className='linkInNavigationBar' to="/transactionform">Add Transaction </Link>
-    </div>
+    <ul className='navbar'>
+      <li><Link className='linkInNavigationBar' to="/">Home </Link> </li>
+      <li><Link className='linkInNavigationBar' to="/breakdown">Breakdown </Link></li>
+      <li><Link className='linkInNavigationBar' to="/transactionform">Add Transaction </Link></li>
+    </ul>
   )
 }

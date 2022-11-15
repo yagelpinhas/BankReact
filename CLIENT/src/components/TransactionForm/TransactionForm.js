@@ -7,35 +7,33 @@ import axios from 'axios';
 
 
 export default function TransactionForm(props) {
-  const [amountInput, setAmountInput] = useState("")
-  const [categoryInput, setCategoryInput] = useState("")
-  const [vendorInput, setVendorInput] = useState("")
+  const [transactionInputs,setTransactionsInputs] = useState({amountInput:"",categoryInput:"",vendorInput:""})
 
   const handleChange = e =>{
-    if (e.target.name=="amount"){
-      setAmountInput(e.target.value)
-    }
-    else if (e.target.name=="category"){
-      setCategoryInput(e.target.value)
-    }
-    else{
-      setVendorInput(e.target.value)
-    }
+    console.log(e.target.name)
+    console.log(e.target.value)
+    let newTransactionInputs={...transactionInputs}
+    newTransactionInputs[e.target.name]=e.target.value
+    setTransactionsInputs(newTransactionInputs)
+    console.log(transactionInputs)
   } 
 
   const addTransaction =()=>{
     async function postTransactionToServer(){
-      await axios.post(`http://localhost:8003/transactions?amount=${amountInput}&category=${categoryInput}&vendor=${vendorInput}`);
+      await axios.post(`http://localhost:8003/transactions?amount=${transactionInputs.amountInput}&category=${transactionInputs.categoryInput}&vendor=${transactionInputs.vendorInput}`);
     }
+    console.log(transactionInputs.amountInput)
+    console.log(transactionInputs.categoryInput)
+    console.log(transactionInputs.vendorInput)
     postTransactionToServer()
-    props.updateBalance(amountInput)
+    props.updateBalance(transactionInputs.amountInput)
   }
 
   return (
     <div className='transaction-form'>
-      <input onChange={handleChange} placeholder='amount' name="amount" type="number"></input>
-      <input onChange={handleChange} placeholder='category' name="category"></input>
-      <input onChange={handleChange} placeholder='vendor' name="vendor"></input>
+      <input className="inputform" onChange={handleChange} placeholder='amount' name="amountInput" type="number"  ></input>
+      <input className="inputform" onChange={handleChange} placeholder='category' name="categoryInput"></input>
+      <input className="inputform" onChange={handleChange} placeholder='vendor' name="vendorInput" ></input>
       <button className='addTransaction' onClick={addTransaction}>Add Transaction</button>
   </div>
   )

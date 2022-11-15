@@ -7,6 +7,7 @@ import Balance from './components/Balance/Balance';
 import TransactionForm from './components/TransactionForm/TransactionForm';
 import Breakdown from './components/Breakdown/Breakdown';
 import axios from 'axios';
+import "./App.css"
 
 export default function App() {
 
@@ -26,7 +27,7 @@ export default function App() {
     <Router>
       <div className='App'>
       <NavBar/>
-      <Balance balance={balance}/>
+      <Balance balance={balance}/> 
       <Route path="/" exact render={() => <Transactions updateBalance={updateBalance}/>} />
       <Route path="/transactionform" exact render={() => <TransactionForm updateBalance={updateBalance}/>} />
       <Route path="/breakdown" exact render={() => <Breakdown/>} />

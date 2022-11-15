@@ -1,4 +1,4 @@
-.navbar{
+.navbarzzzz{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
@@ -6,9 +6,43 @@
     height: 50px;
   }
 
-.linkInNavigationBar{
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.linkInNavigationBarZZ{
     color: brown;
     justify-content: center;
     text-align: center;
     align-content: center;
+}
+li {
+  float: left;
+  font-family: "Audiowide", sans-serif;
+}
+
+.linkInNavigationBar{
+  display: block;
+  color: #666;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: #199266;
+}
+
+.linkInNavigationBar:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.linkInNavigationBar.active {
+  color: white;
+  background-color: #04AA6D;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+import "./Breakdown.css"
 
 export default function Breakdown(props) {
   const [breakdown,setBreakdown] = useState([])
@@ -16,11 +17,10 @@ export default function Breakdown(props) {
 
   return (
     <div>
-      Break down:
       {breakdown.map(expenses =>
-         <div>
-          <span>{expenses.category} </span>
-          <span>{expenses.sum}</span>
+         <div className='expenses'>
+          <span className='font-effect-outline'>{expenses.category} </span>
+          <span className='font-effect-outline'>{expenses.sum} $</span>
          </div>)}
       </div>
   )

@@ -1,0 +1,7 @@
+.expenses{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+    background-color: beige;
+    margin-top: 20px;
+}

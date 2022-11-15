@@ -1,6 +1,11 @@
 .balance{
-    color: darkgoldenrod;
+    color: #fffffe;
     justify-content: center;
     text-align: center;
     align-content: center;
+    font-family: "Sofia", sans-serif;
+    background-color: rgb(29, 228, 158);
+    width:100px;
+    opacity: 0.9;
+    margin-left: 450px;
 }

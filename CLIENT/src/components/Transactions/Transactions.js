@@ -13,38 +13,18 @@ export default function Transactions(props) {
     }
     deleteTransactionFromServer(id)
     props.updateBalance(-1*amount)
+    fetchTransactions()
   }
 
   useEffect(() => {
-    /*
-    let new_transactions = [
-      {
-          "id": 1,
-          "amount": 2000,
-          "category": "salary",
-          "vendor": "Cyber"
-      },
-      {
-          "id": 2,
-          "amount": 3000,
-          "category": "salary",
-          "vendor": "Menora"
-      },
-      {
-          "id": 5,
-          "amount": -1000,
-          "category": "food",
-          "vendor": "Kampai"
-      }
-  ]
-  */
-    async function fetchTransactions(){
-      let promise= await axios.get("http://localhost:8003/transactions")
-      let new_transactions=promise.data
-      setTransactions(new_transactions) 
-    }
     fetchTransactions() 
   },[transactions])
+  
+  async function fetchTransactions(){
+    let promise= await axios.get("http://localhost:8003/transactions")
+    let new_transactions=promise.data
+    setTransactions(new_transactions) 
+  }
   
   return (
     <div className='transactions-board'>{transactions.map(transaction => <Transaction transaction={transaction} deleteTransaction={deleteTransaction}/>)}</div>

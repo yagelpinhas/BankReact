@@ -30,7 +30,6 @@ app.add_middleware(
 
 @app.get("/transactions")    
 async def get_transactions():
-    a=5
     return database_manager.get_transactions()
 
 @app.post("/transactions")
