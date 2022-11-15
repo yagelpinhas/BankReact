@@ -4,11 +4,11 @@
     grid-gap: 15px;
     height: 50px;
     display: relative;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: 400px;
 }
 
-.addTransaction{
+.deposit{
     width:100px;
     justify-content: center;
     text-align: center;
@@ -21,7 +21,33 @@
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-style:unset;
 }
+.withdraw{
+    width:100px;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+    background-color: rgb(220, 71, 25);
+    width: 200px;
+    height: 50px;
+    color: white;
+    border-color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style:unset;
+}
+
 
 .inputform{
     width:190px;
+}
+
+.buttons{
+    display: grid;
+}
+
+.title-inserting-transaction{
+    font-family: "Trirong", serif;
+    color: rgb(56, 124, 11);
+    background-color: white;
+    width: 200px;
+    margin-left: 400px;
 }

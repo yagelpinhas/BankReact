@@ -6,6 +6,7 @@ import Transactions from './components/Transactions/Transactions';
 import Balance from './components/Balance/Balance';
 import TransactionForm from './components/TransactionForm/TransactionForm';
 import Breakdown from './components/Breakdown/Breakdown';
+import Operations from './components/Operations/Operations';
 import axios from 'axios';
 import "./App.css"
 
@@ -18,8 +19,14 @@ export default function App() {
     await axios.delete(`/http://localhost:8000/transactions?id=${id}`)
   }
 
-  const updateBalance=(delta)=>{
-    let newBalance = balance+parseInt(delta)
+  const updateBalance=(delta,operation)=>{
+    let newBalance;
+    if(operation=="plus"){
+      newBalance = balance+parseInt(delta)
+    }
+    else{
+      newBalance = balance-parseInt(delta)
+    }
     setBalance(newBalance)
   }
   
@@ -29,7 +36,7 @@ export default function App() {
       <NavBar/>
       <Balance balance={balance}/> 
       <Route path="/" exact render={() => <Transactions updateBalance={updateBalance}/>} />
-      <Route path="/transactionform" exact render={() => <TransactionForm updateBalance={updateBalance}/>} />
+      <Route path="/operations" exact render={() => <Operations updateBalance={updateBalance}/>} />
       <Route path="/breakdown" exact render={() => <Breakdown/>} />
       </div>
     </Router>

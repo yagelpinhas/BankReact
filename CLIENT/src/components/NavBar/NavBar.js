@@ -8,7 +8,7 @@ export default function NavBar() {
     <ul className='navbar'>
       <li><Link className='linkInNavigationBar' to="/">Home </Link> </li>
       <li><Link className='linkInNavigationBar' to="/breakdown">Breakdown </Link></li>
-      <li><Link className='linkInNavigationBar' to="/transactionform">Add Transaction </Link></li>
+      <li><Link className='linkInNavigationBar' to="/operations">Operations </Link></li>
     </ul>
   )
 }
