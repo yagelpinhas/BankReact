@@ -36,7 +36,7 @@ export default function App() {
       <NavBar/>
       <Balance balance={balance}/> 
       <Route path="/" exact render={() => <Transactions updateBalance={updateBalance}/>} />
-      <Route path="/operations" exact render={() => <Operations updateBalance={updateBalance}/>} />
+      <Route path="/operations" exact render={() => <Operations updateBalance={updateBalance} balance={balance}/>} />
       <Route path="/breakdown" exact render={() => <Breakdown/>} />
       </div>
     </Router>

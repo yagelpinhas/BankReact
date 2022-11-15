@@ -8,7 +8,7 @@ import axios from 'axios';
 export default function operations(props) {
   return (
     <div>
-        <TransactionForm updateBalance={props.updateBalance} />
+        <TransactionForm updateBalance={props.updateBalance} balance={props.balance} />
     </div>
   )
 }

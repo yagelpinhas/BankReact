@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import "./TransactionForm.css"
 import axios from 'axios';
 
-
 export default function TransactionForm(props) {
   const [transactionInputs,setTransactionsInputs] = useState({amountInput:"",categoryInput:"",vendorInput:""})
 
@@ -15,20 +14,40 @@ export default function TransactionForm(props) {
     setTransactionsInputs(newTransactionInputs)
   } 
 
+  const checkValidity=()=>{
+    return transactionInputs.amountInput!=""&&transactionInputs.categoryInput!=""&&transactionInputs.vendorInput!=""
+  }
   const addDeposit =()=>{
     async function postTransactionToServer(){
       await axios.post(`http://localhost:8003/transactions?amount=${transactionInputs.amountInput}&category=${transactionInputs.categoryInput}&vendor=${transactionInputs.vendorInput}`);
     }
-    postTransactionToServer()
-    props.updateBalance(transactionInputs.amountInput,"plus")
+    if(!checkValidity()){
+      alert("one of the fields is missing")
+    }
+    else{
+      postTransactionToServer()
+      props.updateBalance(transactionInputs.amountInput,"plus")
+    }
+  }
+
+  const canWithdraw=()=>{
+    return props.balance-transactionInputs.amountInput>=500
   }
 
   const addWithdraw =()=>{
     async function postTransactionToServer(){
       await axios.post(`http://localhost:8003/transactions?amount=${transactionInputs.amountInput*(-1)}&category=${transactionInputs.categoryInput}&vendor=${transactionInputs.vendorInput}`);
     }
-    postTransactionToServer()
-    props.updateBalance(transactionInputs.amountInput,"minus")
+    if(!checkValidity()){
+      alert("one of the fields is missing")
+    }
+    else if(!canWithdraw()){
+      alert("Insufficient Funds’")
+    }
+    else{
+      postTransactionToServer()
+      props.updateBalance(transactionInputs.amountInput,"minus")
+    }
   }
 
   return (
