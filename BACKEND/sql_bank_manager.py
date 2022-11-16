@@ -22,6 +22,11 @@ class SQL_BANK_MANAGER:
     def add_transaction(self,amount,category,vendor):
         try:
             with self.connection.cursor() as cursor:
+                query =f'SELECT * FROM categories WHERE categories.name="{category}"'
+                cursor.execute(query)
+                result = cursor.fetchall()
+                if len(result)==0:
+                    raise Exception
                 query = f'INSERT INTO transactions (amount,category,vendor) VALUES({amount},"{category}","{vendor}");'
                 cursor.execute(query)
                 self.connection.commit()
@@ -30,6 +35,11 @@ class SQL_BANK_MANAGER:
     def delete_transaction(self,id):
         try:
             with self.connection.cursor() as cursor:
+                query =f'SELECT * FROM transactions WHERE transactions.id={id}'
+                cursor.execute(query)
+                result = cursor.fetchall()
+                if len(result)==0:
+                    raise Exception
                 query = f'DELETE FROM transactions WHERE id={id};'
                 cursor.execute(query)
                 self.connection.commit()

@@ -7,7 +7,7 @@ import axios from 'axios';
 
 export default function TransactionForm(props) {
   const [transactionInputs,setTransactionsInputs] = useState({amountInput:"",categoryInput:"",vendorInput:""})
-
+  let categories = ["food","salary","clothes"]
   const handleChange = e =>{
     let newTransactionInputs={...transactionInputs}
     newTransactionInputs[e.target.name]=e.target.value
@@ -55,7 +55,10 @@ export default function TransactionForm(props) {
       <div className='title-inserting-transaction'>Insert a transaction : </div>
     <div className='transaction-form'>
       <input className="inputform" onChange={handleChange} placeholder='amount' name="amountInput" type="number"  ></input>
-      <input className="inputform" onChange={handleChange} placeholder='category' name="categoryInput"></input>
+      <select placeholder="category" className='inputform' name="categoryInput" onChange={handleChange}>
+      <option selected disabled>Choose Category</option>
+        {categories.map(category=><option value={category}>{category}</option>)}
+        </select>
       <input className="inputform" onChange={handleChange} placeholder='vendor' name="vendorInput" ></input>
       <div className='buttons'>
       <button className='deposit' onClick={addDeposit}>Deposit</button>
