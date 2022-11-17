@@ -19,7 +19,7 @@ export default function TransactionForm(props) {
   }
   const addDeposit =()=>{
     async function postTransactionToServer(){
-      await axios.post(`http://localhost:8003/transactions?amount=${transactionInputs.amountInput}&category=${transactionInputs.categoryInput}&vendor=${transactionInputs.vendorInput}`);
+      await axios.post(`http://localhost:8003/transactions`,{"amount": transactionInputs.amountInput, "category": transactionInputs.categoryInput,"vendor": transactionInputs.vendorInput});
     }
     if(!checkValidity()){
       alert("one of the fields is missing")
@@ -36,7 +36,7 @@ export default function TransactionForm(props) {
 
   const addWithdraw =()=>{
     async function postTransactionToServer(){
-      await axios.post(`http://localhost:8003/transactions?amount=${transactionInputs.amountInput*(-1)}&category=${transactionInputs.categoryInput}&vendor=${transactionInputs.vendorInput}`);
+      await axios.post(`http://localhost:8003/transactions`,{"amount": transactionInputs.amountInput*(-1), "category": transactionInputs.categoryInput,"vendor": transactionInputs.vendorInput});
     }
     if(!checkValidity()){
       alert("one of the fields is missing")

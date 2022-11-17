@@ -31,19 +31,23 @@ async def get_transactions():
     return database_manager.get_transactions()
 
 @app.post("/transactions")
-async def add_transaction(amount,category,vendor,response: Response):
+async def add_transaction(request: Request,response: Response):
     try:
-        database_manager.add_transaction(amount,category,vendor)
+        req = await request.json()
+        database_manager.add_transaction(req["amount"],req["category"],req["vendor"])
+        response.status_code=status.HTTP_201_CREATED
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST
         )
     
 
-@app.delete("/transactions")
-async def delete_transaction(id):
+@app.delete("/transactions/{id}")
+async def delete_transaction(id,response: Response):
     try:
         database_manager.delete_transaction(id)
+        response.status_code=status.HTTP_204_NO_CONTENT
+
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST

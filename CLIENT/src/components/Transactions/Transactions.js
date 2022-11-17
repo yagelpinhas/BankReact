@@ -9,7 +9,7 @@ export default function Transactions(props) {
 
   const deleteTransaction =(id,amount)=>{
     async function deleteTransactionFromServer(id){
-      await axios.delete(`http://localhost:8003/transactions?id=${id}`);
+      await axios.delete(`http://localhost:8003/transactions/${id}`);
     }
     deleteTransactionFromServer(id)
     props.updateBalance(amount,"minus")
