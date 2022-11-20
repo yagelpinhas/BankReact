@@ -10,3 +10,11 @@ class Database_Manager:
         self.bank_manager.delete_transaction(id)
     def get_breakdown(self):
         return self.bank_manager.get_breakdown()
+    def get_balance(self):
+        return self.bank_manager.get_balance()
+    def plus_balance(self,amount):
+        self.bank_manager.plus_balance(amount)
+    def minus_balance(self,amount):
+        self.bank_manager.minus_balance(amount)
+    def get_amount(self,id):
+        return self.bank_manager.get_amount(id)

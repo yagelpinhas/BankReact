@@ -1,0 +1,1 @@
+INSERT INTO users (name,balance) VALUES("main",0);

@@ -54,4 +54,44 @@ class SQL_BANK_MANAGER:
                 results = cursor.fetchall()
                 return results
         except TypeError as e:
-            print(e) 
+            print(e)
+
+    def get_balance(self):
+        try:
+            with self.connection.cursor() as cursor:
+                query =f'SELECT balance FROM users WHERE name="main"'
+                cursor.execute(query)
+                results = cursor.fetchall()
+                return results[0]
+        except TypeError as e:
+            print(e)
+
+    def plus_balance(self,amount):
+        try:
+            with self.connection.cursor() as cursor:
+                query =f'UPDATE users SET balance=balance+{amount} WHERE name="main"'
+                cursor.execute(query)
+                self.connection.commit()
+        except TypeError as e:
+            print(e)
+    
+    def minus_balance(self,amount):
+        try:
+            with self.connection.cursor() as cursor:
+                query =f'UPDATE users SET balance=balance-{amount} WHERE name="main"'
+                cursor.execute(query)
+                self.connection.commit()
+        except TypeError as e:
+            print(e)
+    
+    def get_amount(self,id):
+        try:
+            with self.connection.cursor() as cursor:
+                query =f'SELECT amount FROM transactions WHERE transactions.id={id}'
+                cursor.execute(query)
+                results = cursor.fetchall()
+                return results[0]["amount"]
+        except TypeError as e:
+            print(e)
+
+

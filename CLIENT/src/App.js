@@ -15,21 +15,20 @@ export default function App() {
   const [balance,setBalance] = useState(0)
   
   const deleteTransaction= async function(id){
-    //deleting in server.
     await axios.delete(`/http://localhost:8000/transactions?id=${id}`)
   }
 
-  const updateBalance=(delta,operation)=>{
-    let newBalance;
-    if(operation=="plus"){
-      newBalance = balance+parseInt(delta)
-    }
-    else{
-      newBalance = balance-parseInt(delta)
-    }
-    setBalance(newBalance)
-  }
-  
+ 
+    async function updateBalance(){
+      let balanceObject = await axios.get(`http://localhost:8003/balance`);
+      let newBalance = balanceObject.data["balance"]
+      setBalance(newBalance)
+    } 
+
+    useEffect(() => {
+      updateBalance() 
+    },[])
+
   return (
     <Router>
       <div className='App'>
