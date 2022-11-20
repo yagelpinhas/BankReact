@@ -8,7 +8,7 @@ import pymysql
 from fastapi.middleware.cors import CORSMiddleware
 from DB.SQL_Bank_Manager import SQL_BANK_MANAGER
 from DB.Database_Manager import Database_Manager
-from Routers import transactions_router
+from Routers.Transactions import transactions_router
 
 
 app = FastAPI()
